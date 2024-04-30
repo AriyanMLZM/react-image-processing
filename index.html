@@ -8,6 +8,12 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      const cvOnLoad = () => {
+        console.log("cv is loaded")
+      }
+    </script>
+    <script async src="opencv.js" type="text/javascript" onload="cvOnLoad()"></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
