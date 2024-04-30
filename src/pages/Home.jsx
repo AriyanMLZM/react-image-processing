@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { Header, Inputimg, Inputs, Canvas, Button } from '../components'
+import { Header, Inputimg, Inputs, Canvas, Button, Nav } from '../components'
 import { reader } from '../helpers'
 
 const Home = () => {
@@ -9,6 +9,7 @@ const Home = () => {
   const [threshold, setThreshold] = useState(127)
   const [isCut, setIsCut] = useState(false)
   const [convert, setConvert] = useState(false)
+  const [tab, setTab] = useState(0)
 
   useEffect(() => {
     if (file) {
@@ -24,6 +25,7 @@ const Home = () => {
     <main className=" flex items-center flex-col pb-8">
       <Header />
       <Inputimg props={{ img, file, setFile }} />
+      <Nav props={{ tab, setTab }} />
       <Inputs props={{ setIsCut, isCut, setThreshold, threshold }} />
       <Button func={handleConvert} />
       <Canvas props={{ img, isCut, threshold, convert }} />
