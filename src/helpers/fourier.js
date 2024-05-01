@@ -1,5 +1,4 @@
 const fourier = (src) => {
-  // get optimal size of DFT
   let optimalRows = cv.getOptimalDFTSize(src.rows)
   let optimalCols = cv.getOptimalDFTSize(src.cols)
   let s0 = cv.Scalar.all(0)
@@ -15,7 +14,6 @@ const fourier = (src) => {
     s0
   )
 
-  // use cv.MatVector to distribute space for real part and imaginary part
   let plane0 = new cv.Mat()
   padded.convertTo(plane0, cv.CV_32F)
   let planes = new cv.MatVector()
@@ -25,10 +23,8 @@ const fourier = (src) => {
   planes.push_back(plane1)
   cv.merge(planes, complexI)
 
-  // in-place dft transform
   cv.dft(complexI, complexI)
 
-  // compute log(1 + sqrt(Re(DFT(img))**2 + Im(DFT(img))**2))
   cv.split(complexI, planes)
   cv.magnitude(planes.get(0), planes.get(1), planes.get(0))
   let mag = planes.get(0)
@@ -36,12 +32,9 @@ const fourier = (src) => {
   cv.add(mag, m1, mag)
   cv.log(mag, mag)
 
-  // crop the spectrum, if it has an odd number of rows or columns
   let rect = new cv.Rect(0, 0, mag.cols & -2, mag.rows & -2)
   mag = mag.roi(rect)
 
-  // rearrange the quadrants of Fourier image
-  // so that the origin is at the image center
   let cx = mag.cols / 2
   let cy = mag.rows / 2
   let tmp = new cv.Mat()
@@ -56,17 +49,14 @@ const fourier = (src) => {
   let q2 = mag.roi(rect2)
   let q3 = mag.roi(rect3)
 
-  // exchange 1 and 4 quadrants
   q0.copyTo(tmp)
   q3.copyTo(q0)
   tmp.copyTo(q3)
 
-  // exchange 2 and 3 quadrants
   q1.copyTo(tmp)
   q2.copyTo(q1)
   tmp.copyTo(q2)
 
-  // The pixel value of cv.CV_32S type image ranges from 0 to 1.
   cv.normalize(mag, mag, 0, 1, cv.NORM_MINMAX)
 
   padded.delete()
@@ -74,7 +64,7 @@ const fourier = (src) => {
   complexI.delete()
   m1.delete()
   tmp.delete()
-  
+
   return mag
 }
 
