@@ -1,5 +1,5 @@
 import reader from './fileReader'
-import convertPixels from './convertPixels'
 import imgDownloader from './imgDownloader'
+import convertBw from './convertBw'
 
-export { reader, convertPixels, imgDownloader }
+export { reader, imgDownloader, convertBw }

@@ -28,7 +28,7 @@ const Home = () => {
       <Nav props={{ tab, setTab }} />
       <Inputs props={{ setIsCut, isCut, setThreshold, threshold }} />
       <Button func={handleConvert} />
-      <Canvas props={{ img, isCut, threshold, convert }} />
+      <Canvas props={{ img, isCut, threshold, convert, tab }} />
     </main>
   )
 }
