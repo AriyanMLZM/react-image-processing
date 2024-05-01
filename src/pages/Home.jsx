@@ -26,7 +26,7 @@ const Home = () => {
       <Header />
       <Inputimg props={{ img, file, setFile }} />
       <Nav props={{ tab, setTab }} />
-      <Inputs props={{ setIsCut, isCut, setThreshold, threshold }} />
+      <Inputs props={{ setIsCut, isCut, setThreshold, threshold, tab }} />
       <Button func={handleConvert} />
       <Canvas props={{ img, isCut, threshold, convert, tab }} />
     </main>

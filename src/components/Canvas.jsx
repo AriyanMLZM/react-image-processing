@@ -6,6 +6,7 @@ import { Button2 } from '.'
 const Canvas = ({ props }) => {
   const [img, setImg] = useState(null)
   const [img2, setImg2] = useState(null)
+
   const canvasRef = useRef()
 
   useEffect(() => {
@@ -28,7 +29,7 @@ const Canvas = ({ props }) => {
         cv.imshow(canvasRef.current, dst)
         src.delete()
         setImg(canvasRef.current.toDataURL('image/jpeg'))
-        
+
         switch (props.tab) {
           case 1:
             convertBw(dst, props.threshold, w, h)
@@ -40,15 +41,26 @@ const Canvas = ({ props }) => {
         dst.delete()
       }
     }
-  }, [props.convert, props.isCut])
+  }, [props.convert])
 
   return (
     <>
       <canvas className="border-2 hidden" ref={canvasRef}></canvas>
-      {img && (
+      {props.tab === 0 && img && (
         <section className="flex flex-col mt-7 justify-center items-center p-6 border-2 rounded">
           <img
-            src={props.tab === 0 ? img : props.tab === 1 ? img2 : ''}
+            src={img}
+            alt="no image"
+            className="rounded md:w-[500px] w-[250px] select-none"
+            draggable={false}
+          />
+          <Button2 func={() => imgDownloader(img)} />
+        </section>
+      )}
+      {props.tab === 1 && img2 && (
+        <section className="flex flex-col mt-7 justify-center items-center p-6 border-2 rounded">
+          <img
+            src={img2}
             alt="no image"
             className="rounded md:w-[500px] w-[250px] select-none"
             draggable={false}

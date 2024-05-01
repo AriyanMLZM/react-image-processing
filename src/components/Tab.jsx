@@ -9,9 +9,9 @@ const Tab = ({ props }) => {
       }}
       className={`${
         props.active
-          ? 'bg-primary text-bgColor'
+          ? 'text-primary border-b-[3px] border-primary'
           : 'text-white md:hover:text-primary'
-      } flex justify-center items-center font-bold rounded-[20px] pb-[2px] text-[20px] w-[80px] h-[35px]`}
+      } flex mx-2 justify-center items-center font-bold pb-[10px] text-[20px] w-[80px] h-[35px]`}
     >
       {props.text}
     </button>
