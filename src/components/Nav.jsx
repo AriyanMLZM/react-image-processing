@@ -21,6 +21,14 @@ const Nav = ({ props }) => {
           ...props,
         }}
       />
+      <Tab
+        props={{
+          active: props.tab === 2 ? true : false,
+          ind: 2,
+          text: 'Fourier',
+          ...props,
+        }}
+      />
     </nav>
   )
 }

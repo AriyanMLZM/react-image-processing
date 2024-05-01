@@ -1,11 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { imgDownloader, convertBw } from '../helpers'
+import { imgDownloader, convertBw, fourier } from '../helpers'
 import { Button2 } from '.'
 
 const Canvas = ({ props }) => {
   const [img, setImg] = useState(null)
   const [img2, setImg2] = useState(null)
+  const [img3, setImg3] = useState(null)
 
   const canvasRef = useRef()
 
@@ -36,6 +37,11 @@ const Canvas = ({ props }) => {
             cv.imshow(canvasRef.current, dst)
             setImg2(canvasRef.current.toDataURL('image/jpeg'))
             break
+          case 2:
+            let mag = fourier(dst)
+            cv.imshow(canvasRef.current, mag)
+            setImg3(canvasRef.current.toDataURL('image/jpeg'))
+            break
         }
 
         dst.delete()
@@ -61,6 +67,17 @@ const Canvas = ({ props }) => {
         <section className="flex flex-col mt-7 justify-center items-center p-6 border-2 rounded">
           <img
             src={img2}
+            alt="no image"
+            className="rounded md:w-[500px] w-[250px] select-none"
+            draggable={false}
+          />
+          <Button2 func={() => imgDownloader(img)} />
+        </section>
+      )}
+      {props.tab === 2 && img3 && (
+        <section className="flex flex-col mt-7 justify-center items-center p-6 border-2 rounded">
+          <img
+            src={img3}
             alt="no image"
             className="rounded md:w-[500px] w-[250px] select-none"
             draggable={false}
