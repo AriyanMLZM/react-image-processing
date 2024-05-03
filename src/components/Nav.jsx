@@ -25,7 +25,7 @@ const Nav = ({ props }) => {
         props={{
           active: props.tab === 2 ? true : false,
           ind: 2,
-          text: 'Fourier',
+          text: 'Fourier  ',
           ...props,
         }}
       />

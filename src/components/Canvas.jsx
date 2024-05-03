@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { imgDownloader, convertBw, fourier } from '../helpers'
+import { imgDownloader, convertBw, fourier, convertLog } from '../helpers'
 import { Button2 } from '.'
 
 const Canvas = ({ props }) => {
   const [img, setImg] = useState(null)
   const [img2, setImg2] = useState(null)
   const [img3, setImg3] = useState(null)
+  const [img4, setImg4] = useState(null)
 
   const canvasRef = useRef()
 
@@ -41,6 +42,15 @@ const Canvas = ({ props }) => {
             let mag = fourier(dst)
             cv.imshow(canvasRef.current, mag)
             setImg3(canvasRef.current.toDataURL('image/jpeg'))
+            let src = cv.imread(canvasRef.current)
+            let dst2 = new cv.Mat()
+            cv.cvtColor(src, dst2, cv.COLOR_RGBA2GRAY, 0)
+            convertLog(dst2, 1, w, h)
+            cv.imshow(canvasRef.current, dst2)
+            setImg4(canvasRef.current.toDataURL('image/jpeg'))
+            src.delete()
+            dst2.delete()
+            mag.delete()
             break
         }
 
@@ -80,6 +90,12 @@ const Canvas = ({ props }) => {
             src={img3}
             alt="no image"
             className="rounded md:w-[500px] w-[250px] select-none"
+            draggable={false}
+          />
+          <img
+            src={img4}
+            alt="no image"
+            className="rounded md:w-[500px] w-[250px] select-none mt-6"
             draggable={false}
           />
           <Button2 func={() => imgDownloader(img3)} />
