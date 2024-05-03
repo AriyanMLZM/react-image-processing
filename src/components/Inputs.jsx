@@ -19,6 +19,25 @@ const Inputs = ({ props }) => {
           />
         </div>
       )}
+      {props.tab === 2 && (
+        <div>
+          <p className="text-white mb-2 text-[18px]">
+            s = C * log ( 1 + r )
+          </p>
+          <p className="text-white mb-1 text-[18px]">
+            C : {props.c}
+          </p>
+          <input
+            value={props.c}
+            className="slider w-[250px] accent-primary"
+            min={0}
+            max={10}
+            step={0.1}
+            type="range"
+            onChange={(e) => props.setC(e.target.value)}
+          />
+        </div>
+      )}
       <div className="flex">
         <input
           type="checkbox"

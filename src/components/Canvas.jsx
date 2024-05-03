@@ -45,7 +45,7 @@ const Canvas = ({ props }) => {
             let src = cv.imread(canvasRef.current)
             let dst2 = new cv.Mat()
             cv.cvtColor(src, dst2, cv.COLOR_RGBA2GRAY, 0)
-            convertLog(dst2, 1, w, h)
+            convertLog(dst2, props.c, w, h)
             cv.imshow(canvasRef.current, dst2)
             setImg4(canvasRef.current.toDataURL('image/jpeg'))
             src.delete()
