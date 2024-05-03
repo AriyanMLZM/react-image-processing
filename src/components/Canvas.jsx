@@ -100,7 +100,7 @@ const Canvas = ({ props }) => {
             className="rounded md:w-[500px] w-[250px] select-none mt-6"
             draggable={false}
           />
-          <Button2 func={() => imgDownloader(img3)} />
+          <Button2 func={() => imgDownloader(img4)} />
         </section>
       )}
       {props.tab === 3 && img5 && (
