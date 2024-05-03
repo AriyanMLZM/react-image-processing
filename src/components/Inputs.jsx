@@ -2,11 +2,11 @@ import React from 'react'
 
 const Inputs = ({ props }) => {
   return (
-    <section className="flex flex-col h-[100px] justify-center mt-10 select-none gap-4 mb-4">
+    <section className="flex flex-col h-[150px] justify-center mt-10 select-none gap-4 mb-4">
       {props.tab === 1 && (
         <div>
           <p className="text-white mb-1 text-[18px]">
-            Threshold: {props.threshold}
+            Threshold : {props.threshold}
           </p>
           <input
             value={props.threshold}
@@ -22,20 +22,33 @@ const Inputs = ({ props }) => {
       {props.tab === 2 && (
         <div>
           <p className="text-white mb-2 text-[18px]">
-            s = C * log ( 1 + r )
+            s = c log ( 1 + r )
           </p>
           <p className="text-white mb-1 text-[18px]">
-            C : {props.c}
+            c : {props.c}
           </p>
           <input
             value={props.c}
             className="slider w-[250px] accent-primary"
             min={0}
-            max={10}
+            max={30}
             step={0.1}
             type="range"
             onChange={(e) => props.setC(e.target.value)}
           />
+        </div>
+      )}
+      {props.tab === 3 && (
+        <div>
+          <p className="text-white text-[18px]">
+            ( r1, s1 ) = ( r_min, 0 ) <br />
+            ( r2, s2 ) = ( r_max, 255 )
+          </p>
+          <p className="text-white text-[18px] mt-2">
+            {props.min} <br />
+            {props.max} <br />
+            {props.eq}
+          </p>
         </div>
       )}
       <div className="flex">

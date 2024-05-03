@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { imgDownloader, convertBw, fourier, convertLog } from '../helpers'
+import { imgDownloader, convertBw, fourier, convertLog, contrast } from '../helpers'
 import { Button2 } from '.'
 
 const Canvas = ({ props }) => {
@@ -8,6 +8,7 @@ const Canvas = ({ props }) => {
   const [img2, setImg2] = useState(null)
   const [img3, setImg3] = useState(null)
   const [img4, setImg4] = useState(null)
+  const [img5, setImg5] = useState(null)
 
   const canvasRef = useRef()
 
@@ -51,6 +52,11 @@ const Canvas = ({ props }) => {
             src.delete()
             dst2.delete()
             mag.delete()
+            break
+          case 3:
+            contrast(dst, w, h, props.setMin, props.setMax, props.setEq)
+            cv.imshow(canvasRef.current, dst)
+            setImg5(canvasRef.current.toDataURL('image/jpeg'))
             break
         }
 
@@ -99,6 +105,17 @@ const Canvas = ({ props }) => {
             draggable={false}
           />
           <Button2 func={() => imgDownloader(img3)} />
+        </section>
+      )}
+      {props.tab === 3 && img5 && (
+        <section className="flex flex-col mt-7 justify-center items-center p-6 border-2 rounded">
+          <img
+            src={img5}
+            alt="no image"
+            className="rounded md:w-[500px] w-[250px] select-none"
+            draggable={false}
+          />
+          <Button2 func={() => imgDownloader(img5)} />
         </section>
       )}
     </>

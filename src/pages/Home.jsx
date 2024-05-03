@@ -7,10 +7,13 @@ const Home = () => {
   const [file, setFile] = useState(null)
   const [img, setImg] = useState(null)
   const [threshold, setThreshold] = useState(127)
-  const [c, setC] = useState(5)
+  const [c, setC] = useState(15)
   const [isCut, setIsCut] = useState(false)
   const [convert, setConvert] = useState(false)
   const [tab, setTab] = useState(0)
+  const [eq, setEq] = useState('')
+  const [min, setMin] = useState('')
+  const [max, setMax] = useState('')
 
   useEffect(() => {
     if (file) {
@@ -27,9 +30,9 @@ const Home = () => {
       <Header />
       <Inputimg props={{ img, file, setFile }} />
       <Nav props={{ tab, setTab }} />
-      <Inputs props={{ setIsCut, isCut, setThreshold, threshold, tab, c, setC }} />
+      <Inputs props={{ setIsCut, isCut, setThreshold, threshold, tab, c, setC, min, max, eq }} />
       <Button func={handleConvert} />
-      <Canvas props={{ img, isCut, threshold, convert, tab, c }} />
+      <Canvas props={{ img, isCut, threshold, convert, tab, c, setMin, setMax, setEq }} />
     </main>
   )
 }
