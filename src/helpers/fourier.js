@@ -1,4 +1,4 @@
-const fourier = (src) => {
+const fourier = (src, withLog) => {
   let optimalRows = cv.getOptimalDFTSize(src.rows)
   let optimalCols = cv.getOptimalDFTSize(src.cols)
   let s0 = cv.Scalar.all(0)
@@ -30,7 +30,7 @@ const fourier = (src) => {
   let mag = planes.get(0)
   let m1 = new cv.Mat.ones(mag.rows, mag.cols, mag.type())
   cv.add(mag, m1, mag)
-  cv.log(mag, mag)
+  if (withLog) cv.log(mag, mag)
 
   let rect = new cv.Rect(0, 0, mag.cols & -2, mag.rows & -2)
   mag = mag.roi(rect)

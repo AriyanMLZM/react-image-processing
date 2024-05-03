@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { imgDownloader, convertBw, fourier, convertLog, contrast } from '../helpers'
+import { imgDownloader, convertBw, fourier, contrast } from '../helpers'
 import { Button2 } from '.'
 
 const Canvas = ({ props }) => {
@@ -40,17 +40,13 @@ const Canvas = ({ props }) => {
             setImg2(canvasRef.current.toDataURL('image/jpeg'))
             break
           case 2:
-            let mag = fourier(dst)
+            let mag = fourier(dst, false)
             cv.imshow(canvasRef.current, mag)
             setImg3(canvasRef.current.toDataURL('image/jpeg'))
-            let src = cv.imread(canvasRef.current)
-            let dst2 = new cv.Mat()
-            cv.cvtColor(src, dst2, cv.COLOR_RGBA2GRAY, 0)
-            convertLog(dst2, props.c, w, h)
-            cv.imshow(canvasRef.current, dst2)
+
+            mag = fourier(dst, true)
+            cv.imshow(canvasRef.current, mag)
             setImg4(canvasRef.current.toDataURL('image/jpeg'))
-            src.delete()
-            dst2.delete()
             mag.delete()
             break
           case 3:

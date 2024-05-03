@@ -19,30 +19,10 @@ const Inputs = ({ props }) => {
           />
         </div>
       )}
-      {props.tab === 2 && (
-        <div>
-          <p className="text-white mb-2 text-[18px]">
-            s = c log ( 1 + r )
-          </p>
-          <p className="text-white mb-1 text-[18px]">
-            c : {props.c}
-          </p>
-          <input
-            value={props.c}
-            className="slider w-[250px] accent-primary"
-            min={0}
-            max={30}
-            step={0.1}
-            type="range"
-            onChange={(e) => props.setC(e.target.value)}
-          />
-        </div>
-      )}
       {props.tab === 3 && (
         <div>
           <p className="text-white text-[18px]">
-            ( r1, s1 ) = ( r_min, 0 ) <br />
-            ( r2, s2 ) = ( r_max, 255 )
+            ( r1, s1 ) = ( r_min, 0 ) <br />( r2, s2 ) = ( r_max, 255 )
           </p>
           <p className="text-white text-[18px] mt-2">
             {props.min} <br />
