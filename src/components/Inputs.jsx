@@ -19,6 +19,13 @@ const Inputs = ({ props }) => {
           />
         </div>
       )}
+      {props.tab === 2 && (
+        <div>
+          <p className="text-white mb-4 text-[20px]">
+            Enhanced with Log transform
+          </p>
+        </div>
+      )}
       {props.tab === 3 && (
         <div>
           <p className="text-white text-[18px]">
