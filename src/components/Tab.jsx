@@ -11,7 +11,7 @@ const Tab = ({ props }) => {
         props.active
           ? 'text-primary border-b-[3px] border-primary'
           : 'text-white md:hover:text-primary'
-      } flex justify-center items-center font-bold pb-[10px] md:text-[20px] text-[15px] h-[35px] mx-4`}
+      } flex justify-center items-center font-bold pb-[10px] md:text-[20px] text-[17px] h-[35px] md:mx-4 mx-2`}
     >
       {props.text}
     </button>
