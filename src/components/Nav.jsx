@@ -4,7 +4,7 @@ import { Tab } from './'
 
 const Nav = ({ props }) => {
   return (
-    <nav className="flex mt-12 justify-around w-[350px]">
+    <nav className="flex mt-12 justify-around">
       <Tab
         props={{
           active: props.tab === 0 ? true : false,
@@ -34,6 +34,14 @@ const Nav = ({ props }) => {
           active: props.tab === 3 ? true : false,
           ind: 3,
           text: 'Contrast',
+          ...props,
+        }}
+      />
+      <Tab
+        props={{
+          active: props.tab === 4 ? true : false,
+          ind: 4,
+          text: 'Histogram',
           ...props,
         }}
       />
