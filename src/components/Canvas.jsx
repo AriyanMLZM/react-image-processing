@@ -1,6 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { imgDownloader, convertBw, fourier, contrast, histogram } from '../helpers'
+import {
+  imgDownloader,
+  convertBw,
+  fourier,
+  contrast,
+  histogram,
+} from '../helpers'
 import { Button2 } from '.'
 
 const Canvas = ({ props }) => {
@@ -10,6 +16,8 @@ const Canvas = ({ props }) => {
   const [img4, setImg4] = useState(null)
   const [img5, setImg5] = useState(null)
   const [img6, setImg6] = useState(null)
+  const [img7, setImg7] = useState(null)
+  const [img8, setImg8] = useState(null)
 
   const canvasRef = useRef()
 
@@ -59,7 +67,15 @@ const Canvas = ({ props }) => {
             let hist = histogram(dst)
             cv.imshow(canvasRef.current, hist)
             setImg6(canvasRef.current.toDataURL('image/jpeg'))
+            let eq = new cv.Mat()
+            cv.equalizeHist(dst, eq)
+            cv.imshow(canvasRef.current, eq)
+            setImg7(canvasRef.current.toDataURL('image/jpeg'))
+            hist = histogram(eq)
+            cv.imshow(canvasRef.current, hist)
+            setImg8(canvasRef.current.toDataURL('image/jpeg'))
             hist.delete()
+            eq.delete()
             break
         }
 
@@ -123,13 +139,45 @@ const Canvas = ({ props }) => {
       )}
       {props.tab === 4 && img6 && (
         <section className="flex flex-col mt-7 justify-center items-center p-6 border-2 rounded">
-          <img
-            src={img6}
-            alt="no image"
-            className="rounded md:w-[500px] w-[250px] select-none"
-            draggable={false}
-          />
-          <Button2 func={() => imgDownloader(img6)} />
+          <div className="flex">
+            <img
+              src={img}
+              alt="no image"
+              className="mr-4 rounded md:w-[300px] w-[150px] select-none"
+              draggable={false}
+            />
+            <div>
+              <p className="text-white md:text-[20px] text-[17px] text-center mb-4">
+                Histogram
+              </p>
+              <img
+                src={img6}
+                alt="no image"
+                className="rounded md:w-[300px] md:h-[200px] h-[100px] w-[150px] select-none"
+                draggable={false}
+              />
+            </div>
+          </div>
+          <div className="flex mt-4">
+            <img
+              src={img7}
+              alt="no image"
+              className="mr-4 rounded md:w-[300px] w-[150px] select-none"
+              draggable={false}
+            />
+            <div>
+              <p className="text-white md:text-[20px] text-[17px] text-center mb-4">
+                Histogram Eq
+              </p>
+              <img
+                src={img8}
+                alt="no image"
+                className="rounded md:w-[300px] md:h-[200px] h-[100px] w-[150px] select-none"
+                draggable={false}
+              />
+            </div>
+          </div>
+          <Button2 func={() => imgDownloader(img7)} />
         </section>
       )}
     </>
