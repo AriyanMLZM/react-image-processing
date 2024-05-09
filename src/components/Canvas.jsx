@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import { imgDownloader, convertBw, fourier, contrast } from '../helpers'
+import { imgDownloader, convertBw, fourier, contrast, histogram } from '../helpers'
 import { Button2 } from '.'
 
 const Canvas = ({ props }) => {
@@ -9,6 +9,7 @@ const Canvas = ({ props }) => {
   const [img3, setImg3] = useState(null)
   const [img4, setImg4] = useState(null)
   const [img5, setImg5] = useState(null)
+  const [img6, setImg6] = useState(null)
 
   const canvasRef = useRef()
 
@@ -53,6 +54,12 @@ const Canvas = ({ props }) => {
             contrast(dst, w, h, props.setMin, props.setMax, props.setEq)
             cv.imshow(canvasRef.current, dst)
             setImg5(canvasRef.current.toDataURL('image/jpeg'))
+            break
+          case 4:
+            let hist = histogram(dst)
+            cv.imshow(canvasRef.current, hist)
+            setImg6(canvasRef.current.toDataURL('image/jpeg'))
+            hist.delete()
             break
         }
 
@@ -112,6 +119,17 @@ const Canvas = ({ props }) => {
             draggable={false}
           />
           <Button2 func={() => imgDownloader(img5)} />
+        </section>
+      )}
+      {props.tab === 4 && img6 && (
+        <section className="flex flex-col mt-7 justify-center items-center p-6 border-2 rounded">
+          <img
+            src={img6}
+            alt="no image"
+            className="rounded md:w-[500px] w-[250px] select-none"
+            draggable={false}
+          />
+          <Button2 func={() => imgDownloader(img6)} />
         </section>
       )}
     </>
